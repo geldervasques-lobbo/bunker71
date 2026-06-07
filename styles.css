@@ -28,6 +28,19 @@ body {
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  content: "";
+  background:
+    linear-gradient(115deg, transparent 0 42%, rgba(244, 223, 0, 0.035) 48%, transparent 56%),
+    radial-gradient(circle at 16% 20%, rgba(110, 143, 116, 0.13), transparent 28%),
+    var(--ink);
+  background-size: 180% 180%, 100% 100%, 100% 100%;
+  animation: atmosphereShift 16s ease-in-out infinite alternate;
+}
+
 body::selection {
   background: var(--yellow);
   color: var(--ink);
@@ -141,6 +154,19 @@ img {
   isolation: isolate;
 }
 
+.hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: linear-gradient(112deg, transparent 8%, rgba(244, 223, 0, 0.12) 18%, transparent 30%);
+  mix-blend-mode: screen;
+  opacity: 0.66;
+  transform: translateX(-68%);
+  animation: heroSweep 7.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .hero::after {
   position: absolute;
   inset: auto 0 0;
@@ -158,7 +184,9 @@ img {
     linear-gradient(90deg, rgba(7, 7, 7, 0.92) 0%, rgba(7, 7, 7, 0.76) 36%, rgba(7, 7, 7, 0.2) 78%),
     linear-gradient(180deg, rgba(7, 7, 7, 0.34), rgba(7, 7, 7, 0.72)),
     url("assets/hero-bg.png") center / cover no-repeat;
-  transform: scale(1.02);
+  transform: translateY(calc(var(--scroll-y, 0) * 0.035px)) scale(1.06);
+  animation: heroDrift 18s ease-in-out infinite alternate;
+  will-change: transform, background-position;
 }
 
 .hero-content {
@@ -241,12 +269,14 @@ p {
   transition:
     transform 180ms ease,
     background 180ms ease,
-    border-color 180ms ease;
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .button:hover,
 .button:focus-visible {
   transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
 }
 
 .button.primary {
@@ -259,6 +289,7 @@ p {
   border-color: rgba(110, 143, 116, 0.9);
   background: rgba(110, 143, 116, 0.78);
   color: var(--paper);
+  animation: appPulse 2.8s ease-in-out infinite;
 }
 
 .button.ghost {
@@ -268,6 +299,38 @@ p {
 .section {
   width: 100%;
   padding: clamp(66px, 9vw, 130px) clamp(20px, 6vw, 72px);
+}
+
+.motion-strip {
+  overflow: hidden;
+  border-block: 1px solid rgba(244, 223, 0, 0.24);
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.motion-track {
+  display: flex;
+  width: max-content;
+  animation: tickerMove 28s linear infinite;
+}
+
+.motion-track span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding-inline: clamp(24px, 5vw, 58px);
+  font-size: clamp(0.86rem, 1.6vw, 1.14rem);
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.motion-track span::after {
+  width: 8px;
+  height: 8px;
+  margin-left: clamp(24px, 4vw, 46px);
+  content: "";
+  background: var(--ink);
+  transform: rotate(45deg);
 }
 
 .section > * {
@@ -307,6 +370,9 @@ p {
   min-height: 184px;
   padding: clamp(24px, 4vw, 44px);
   background: #0d0d0b;
+  transition:
+    transform 220ms ease,
+    background 220ms ease;
 }
 
 .stat strong {
@@ -346,6 +412,22 @@ p {
 .service {
   min-height: 282px;
   padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 220ms ease,
+    background 220ms ease;
+}
+
+.service::after,
+.project::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(135deg, rgba(244, 223, 0, 0.1), transparent 42%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
 }
 
 .service span {
@@ -377,6 +459,11 @@ p {
 .project {
   min-height: 270px;
   padding: clamp(26px, 4vw, 46px);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 220ms ease,
+    background 220ms ease;
 }
 
 .project.featured {
@@ -427,6 +514,26 @@ p {
   background: rgba(244, 223, 0, 0.08);
   color: var(--paper);
   font-weight: 850;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.stat:hover,
+.service:hover,
+.project:hover {
+  transform: translateY(-6px);
+  background: #171811;
+}
+
+.service:hover::after,
+.project:hover::after {
+  opacity: 1;
+}
+
+.tag-list span:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  background: rgba(244, 223, 0, 0.15);
 }
 
 .impact {
@@ -480,6 +587,15 @@ p {
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 950;
   overflow-wrap: anywhere;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.contact-links a:hover,
+.contact-links a:focus-visible {
+  border-color: rgba(7, 7, 7, 0.65);
+  transform: translateX(8px);
 }
 
 .site-footer {
@@ -499,6 +615,98 @@ p {
 .site-footer p {
   margin: 0;
   font-size: 0.92rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes atmosphereShift {
+  from {
+    background-position: 0% 50%, center, center;
+  }
+
+  to {
+    background-position: 100% 50%, center, center;
+  }
+}
+
+@keyframes heroSweep {
+  0%,
+  42% {
+    opacity: 0;
+    transform: translateX(-70%);
+  }
+
+  58% {
+    opacity: 0.72;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(68%);
+  }
+}
+
+@keyframes heroDrift {
+  from {
+    background-position: center center;
+  }
+
+  to {
+    background-position: 56% 48%;
+  }
+}
+
+@keyframes tickerMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes appPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(110, 143, 116, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(110, 143, 116, 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-media {
+    transform: scale(1.02);
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 1060px) {
