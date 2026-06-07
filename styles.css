@@ -301,38 +301,6 @@ p {
   padding: clamp(66px, 9vw, 130px) clamp(20px, 6vw, 72px);
 }
 
-.motion-strip {
-  overflow: hidden;
-  border-block: 1px solid rgba(244, 223, 0, 0.24);
-  background: var(--yellow);
-  color: var(--ink);
-}
-
-.motion-track {
-  display: flex;
-  width: max-content;
-  animation: tickerMove 28s linear infinite;
-}
-
-.motion-track span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-  padding-inline: clamp(24px, 5vw, 58px);
-  font-size: clamp(0.86rem, 1.6vw, 1.14rem);
-  font-weight: 950;
-  white-space: nowrap;
-}
-
-.motion-track span::after {
-  width: 8px;
-  height: 8px;
-  margin-left: clamp(24px, 4vw, 46px);
-  content: "";
-  background: var(--ink);
-  transform: rotate(45deg);
-}
-
 .section > * {
   max-width: var(--max);
   margin-right: auto;
@@ -665,16 +633,6 @@ p {
 
   to {
     background-position: 56% 48%;
-  }
-}
-
-@keyframes tickerMove {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
   }
 }
 
