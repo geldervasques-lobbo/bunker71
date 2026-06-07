@@ -333,8 +333,7 @@ p {
 }
 
 .service,
-.project,
-.team-grid article {
+.project {
   background: var(--ink-2);
 }
 
@@ -351,8 +350,7 @@ p {
 }
 
 .service p,
-.project p,
-.team-grid p {
+.project p {
   margin-bottom: 0;
   font-size: 0.98rem;
 }
@@ -423,26 +421,6 @@ p {
   background: rgba(244, 223, 0, 0.08);
   color: var(--paper);
   font-weight: 850;
-}
-
-.team {
-  padding-top: 0;
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(245, 242, 231, 0.16);
-}
-
-.team-grid article {
-  min-height: 228px;
-  padding: 28px;
-}
-
-.team-grid h3 {
-  color: var(--yellow);
 }
 
 .impact {
@@ -522,7 +500,6 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .team-grid,
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -601,14 +578,12 @@ p {
   }
 
   .service-grid,
-  .team-grid,
   .stats {
     grid-template-columns: 1fr;
   }
 
   .service,
   .project,
-  .team-grid article,
   .stat {
     min-height: auto;
   }
