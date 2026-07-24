@@ -580,9 +580,21 @@ p {
   width: 142px;
 }
 
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .site-footer p {
   margin: 0;
   font-size: 0.92rem;
+}
+
+.footer-legal {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
 .reveal {
